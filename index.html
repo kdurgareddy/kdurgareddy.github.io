@@ -57,7 +57,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .spin{transform-origin:210px 210px;animation:spin 40s linear infinite}
 .spin .lbl{animation:spin 40s linear infinite reverse;transform-box:fill-box;transform-origin:center}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.spin,.spin .lbl{animation:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.spin,.spin .lbl{animation-duration:90s}}
 
 /* projects */
 .tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px}
@@ -201,7 +201,7 @@ section,footer{position:relative;z-index:1}
 #top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:grid;place-items:center;cursor:pointer;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s;z-index:30}
 #top.show{opacity:1;transform:none}
 #top svg{width:18px;height:18px}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.typed,.term .cur::after,.lm circle,.banner::before{animation:none}#glow,#bgfx{display:none}.card{transform:none!important}.term .ln{opacity:1}}
+@media (prefers-reduced-motion:reduce){.rv{transform:none;transition:opacity .9s ease}.lm circle{animation-duration:4s}.banner::before{animation-duration:10s}}
 @media (hover:none){#glow{display:none}}
 </style>
 </head>
@@ -464,7 +464,9 @@ document.getElementById("skills-grid").innerHTML = skills.map(([h, list]) =>
 
 
 /* ---------- effects ---------- */
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Visitors who ask for reduced motion still get the effects, just calmer (slower dots, no card tilt).
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduce = false;
 
 // scroll progress, back-to-top, active nav
 const prog = document.getElementById("prog"), topBtn = document.getElementById("top");
@@ -531,13 +533,13 @@ addEventListener("pointermove", e => {
   if (!gRun) { gRun = true; requestAnimationFrame(glowLoop); }
 });
 
-// card tilt + spotlight
-if (!reduce) for (const c of grid.children) {
+// card tilt + spotlight (spotlight always, tilt unless calm)
+for (const c of grid.children) {
   c.addEventListener("pointermove", e => {
     if (e.pointerType !== "mouse") return;
     const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
     c.style.setProperty("--mx", x * 100 + "%"); c.style.setProperty("--my", y * 100 + "%");
-    c.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 3.5}deg) rotateY(${(x - 0.5) * 5}deg) translateY(-4px)`;
+    if (!calm) c.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 3.5}deg) rotateY(${(x - 0.5) * 5}deg) translateY(-4px)`;
   });
   c.addEventListener("pointerleave", () => { c.style.transform = ""; });
 }
@@ -577,7 +579,7 @@ if (cv && !reduce) {
     W = cv.clientWidth; H = cv.clientHeight;
     cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const n = Math.round(Math.min(90, W * H / 14000));
-    pts = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35 }));
+    pts = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * (calm ? .12 : .35), vy: (Math.random() - .5) * (calm ? .12 : .35) }));
   };
   const bgRO = new ResizeObserver(size); bgRO.observe(cv);
   cv.parentElement.addEventListener("pointermove", e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
