@@ -246,6 +246,7 @@ section,footer{position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){.rv{transform:none;transition:opacity .9s ease}.lm circle{animation-duration:4s}.banner::before{animation-duration:10s}}
 @media (hover:none){#glow{display:none}}
 
+
 /* ---------- page transitions ---------- */
 #loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--bg);transition:clip-path .9s cubic-bezier(.77,0,.18,1);clip-path:inset(0 0 0 0)}
 #loader.out{clip-path:inset(0 0 100% 0)}
@@ -268,6 +269,56 @@ h2.wipe{clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.77,0,.
 h2.wipe.in{clip-path:inset(0 0 0 0)}
 h2::after{content:"";display:block;width:0;height:3px;margin:14px auto 0;border-radius:3px;background:linear-gradient(90deg,var(--blue),#7cc4ff);transition:width .9s .4s cubic-bezier(.2,.7,.2,1)}
 h2.in::after,h2:not(.wipe)::after{width:64px}
+
+/* ---------- flagship: ReviewPilot ---------- */
+.feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:0;background:var(--card);border:1px solid color-mix(in srgb,var(--blue) 40%,var(--line));border-radius:20px;overflow:hidden;margin-bottom:40px;position:relative}
+.feature::before{content:"";position:absolute;inset:0;background:radial-gradient(600px circle at 0% 0%,color-mix(in srgb,var(--blue) 14%,transparent),transparent 60%);pointer-events:none}
+.fx-info{padding:clamp(24px,3vw,38px);position:relative;display:flex;flex-direction:column}
+.flag{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:12px}
+.flag i{width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 25%,transparent)}
+.fx-info h3{font-size:clamp(26px,3vw,34px);margin-bottom:12px}
+.fx-info p{color:var(--mute);margin:0 0 18px;font-size:15.5px}
+.fx-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.fx-stats div{background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.fx-stats b{display:block;font-size:22px;line-height:1.2}
+.fx-stats span{font-size:12.5px;color:var(--mute)}
+.fx-list{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:7px;font-size:14.5px;color:var(--mute)}
+.fx-list li{padding-left:22px;position:relative}
+.fx-list li::before{content:"";position:absolute;left:2px;top:.55em;width:10px;height:6px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+.fx-list b{color:var(--ink);font-weight:600}
+.fx-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.fx-demo{background:#0b0e14;color:#c9d1d9;display:flex;flex-direction:column;min-height:520px;border-left:1px solid var(--line);font:12.5px/1.6 "JetBrains Mono",ui-monospace,monospace}
+.fx-bar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #1f2633;font-family:Inter,sans-serif}
+.fx-bar b{font-size:14px;color:#e6edf3}
+.fx-bar .pr{color:#7d8590;font-size:13px}
+.fx-bar button{margin-left:auto;background:linear-gradient(135deg,#3b8cff,#2563eb);color:#fff;border:0;border-radius:8px;padding:7px 14px;font:600 13px Inter,sans-serif;cursor:pointer;min-height:34px}
+.fx-bar button:disabled{opacity:.6;cursor:default}
+.pipe{display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr)) auto;gap:8px;align-items:center;padding:12px 16px;border-bottom:1px solid #1f2633}
+.node{border:1px solid #263041;border-radius:8px;padding:6px 8px;background:#111722;font-size:11.5px;color:#7d8590;position:relative;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.node b{display:block;color:#e6edf3;font-size:15px;line-height:1.2}
+.node::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:var(--w,0%);background:#3b8cff;transition:width .2s linear}
+.node.run{border-color:#3b8cff;color:#9ec5ff}
+.node.done{border-color:#2fd27a55}
+.node.done::after{background:#2fd27a}
+.code{flex:1 1 0;min-height:320px;overflow:auto;position:relative;scroll-behavior:smooth}
+.cl{display:grid;grid-template-columns:40px 14px 1fr;white-space:pre;padding-right:12px}
+.cl .n{color:#3d4656;text-align:right;padding-right:8px;user-select:none}
+.cl.a{background:#0f2418}.cl.a .n{color:#5b9b72}
+.cl.d{background:#2a1316;color:#c9919a}
+.cl.hit{box-shadow:inset 3px 0 #ff8a3d}
+.cm{margin:5px 12px 8px 54px;background:#131a26;border:1px solid #263041;border-radius:9px;padding:8px 11px;font:13px/1.5 Inter,sans-serif;white-space:normal;animation:pop .35s cubic-bezier(.2,.7,.2,1)}
+.cm b{color:#e6edf3}
+.cm p{margin:3px 0 0;color:#8b949e}
+.cm small{display:block;margin-top:4px;color:#5c6676;font:11px "JetBrains Mono",monospace}
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}}
+.sv{display:inline-block;font:700 10px Inter,sans-serif;text-transform:uppercase;padding:2px 6px;border-radius:5px;margin-right:6px;vertical-align:1px}
+.sv-critical{background:#ff4d5e26;color:#ff6b7a}.sv-high{background:#ff8a3d26;color:#ffa266}.sv-medium{background:#f5c54226;color:#f5c542}.sv-low{background:#4fb3ff26;color:#6fc1ff}
+.fx-foot{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid #1f2633;font:12.5px Inter,sans-serif;color:#7d8590;min-height:46px;flex-wrap:wrap}
+.verdict{font-weight:700;font-size:12px;padding:4px 10px;border-radius:6px;background:#ff4d5e26;color:#ff6b7a;opacity:0;transition:opacity .4s}
+.verdict.show{opacity:1}
+.fx-note{font-size:12px;color:var(--mute);margin:14px 0 0}
+@media (max-width:980px){.feature{grid-template-columns:1fr}.fx-demo{border-left:0;border-top:1px solid var(--line)}.code{flex:none;height:420px}}
+@media (max-width:600px){.fx-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.pipe{grid-template-columns:repeat(3,minmax(0,1fr))}.fx-demo{min-height:0}.code{height:360px}}
 </style>
 </head>
 <body>
@@ -324,6 +375,41 @@ h2.in::after,h2:not(.wipe)::after{width:64px}
   <div class="wrap">
     <h2>Projects</h2>
     <p class="lede">Things I've built end to end. Every one is open source, with tests, Docker and CI.</p>
+    <article class="feature" id="reviewpilot">
+      <div class="fx-info">
+        <span class="flag"><i></i>Flagship project · AI agents</span>
+        <h3>ReviewPilot</h3>
+        <p>Multi-agent AI code review for pull requests. Security, bug, performance and testing agents review every PR in parallel, a verifier throws out hallucinated or low-confidence findings, and the results land on GitHub as inline comments with suggested fixes.</p>
+        <div class="fx-stats">
+          <div><b>4</b><span>parallel agents</span></div>
+          <div><b>1.00</b><span>precision*</span></div>
+          <div><b>0.87</b><span>recall*</span></div>
+          <div><b>35</b><span>automated tests</span></div>
+        </div>
+        <ul class="fx-list">
+          <li><b>Rules + LLM:</b> Claude or OpenAI with structured output confirms or rejects static hints and adds logic bugs</li>
+          <li><b>Verifier stage:</b> grounds every finding to an added line, merges duplicates, ranks by severity</li>
+          <li><b>Ships 4 ways:</b> GitHub App (webhooks), GitHub Action with SARIF, MCP server for Claude/Cursor, REST API with a dashboard</li>
+          <li><b>Benchmark in CI:</b> labelled cases gate precision and recall on every commit</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>LLM agents</span><span>MCP</span><span>Claude API</span><span>FastAPI</span><span>GitHub Apps</span><span>SARIF</span><span>Docker</span></div>
+        <div class="fx-links"><a class="btn pri" href="https://github.com/kdurgareddy/reviewpilot">View on GitHub</a><a class="btn" href="https://github.com/kdurgareddy/reviewpilot#benchmark">See the benchmark</a></div>
+        <p class="fx-note">*Static-rules baseline on the repo's hand-labelled benchmark (15 files, 39 issues, 0 false positives on clean code).</p>
+      </div>
+      <div class="fx-demo" aria-label="ReviewPilot demo">
+        <div class="fx-bar"><b>acme/shop</b><span class="pr">PR #42 · Add order sync</span><button id="rp-run">Run review</button></div>
+        <div class="pipe" id="rp-pipe">
+          <div class="node" data-n="parse">parse<b>diff</b></div>
+          <div class="node" data-n="security">security<b>–</b></div>
+          <div class="node" data-n="bug">bugs<b>–</b></div>
+          <div class="node" data-n="performance">performance<b>–</b></div>
+          <div class="node" data-n="testing">testing<b>–</b></div>
+          <div class="node" data-n="verify">verify<b>–</b></div>
+        </div>
+        <div class="code" id="rp-code"></div>
+        <div class="fx-foot"><span class="verdict" id="rp-verdict">Changes requested</span><span id="rp-status">Real output from ReviewPilot's agents on the sample PR in the repo.</span></div>
+      </div>
+    </article>
     <div class="tabs" role="group" aria-label="Filter projects" id="tabs"></div>
     <div class="grid" id="grid"></div>
     <div class="banner">
@@ -577,7 +663,7 @@ if (!reduce) {
 }
 
 // reveal on scroll (content stays visible if observers are unavailable)
-const revealTargets = document.querySelectorAll(".lede, .card, .banner, .about > *, .val, .yrs, .sk, .edu, .info, form");
+const revealTargets = document.querySelectorAll(".lede, .feature, .card, .banner, .about > *, .val, .yrs, .sk, .edu, .info, form");
 if (!reduce && "IntersectionObserver" in window) {
   const revealObs = new IntersectionObserver(es => {
     for (const e of es) if (e.isIntersecting) { e.target.classList.add("in"); revealObs.unobserve(e.target); }
@@ -715,6 +801,68 @@ if (cv && !reduce) {
   }
 }
 
+
+/* ---------- ReviewPilot live demo (data: real output from `reviewpilot review examples/sample.diff`) ---------- */
+{
+  const D = {"lines": [[1, " ", "import sqlite3"], [2, "+", "import time"], [3, "+", "import requests"], [4, "+", "import hashlib"], [5, " ", ""], [6, " ", "from app.db import get_conn"], [7, " ", ""], [8, "+", "PAYMENT_API_SECRET = \"pay-prod-7f3a9c21e8b4d6\""], [9, "+", ""], [10, " ", ""], [11, " ", "def get_order(order_id):"], [12, " ", "    conn = get_conn()"], [0, "-", "    return conn.execute(\"SELECT * FROM orders WHERE id = ?\", (order_id,)).fetchone()"], [13, "+", "    query = f\"SELECT * FROM orders WHERE id = {order_id}\""], [14, "+", "    return conn.execute(query).fetchone()"], [15, "+", ""], [16, "+", ""], [17, "+", "def search_orders(customer, status=[]):"], [18, "+", "    conn = get_conn()"], [19, "+", "    rows = conn.execute(\"SELECT * FROM orders WHERE customer = '\" + customer + \"'\").fetchall()"], [20, "+", "    return rows"], [21, "+", ""], [22, "+", ""], [23, "+", "async def sync_orders(order_ids):"], [24, "+", "    for oid in order_ids:"], [25, "+", "        order = get_conn().execute(\"SELECT * FROM orders WHERE id = ?\", (oid,)).fetchone()"], [26, "+", "        requests.post(\"https://erp.example.com/orders\", json=dict(order))"], [27, "+", "        time.sleep(0.5)"], [28, "+", ""], [29, "+", ""], [30, "+", "def hash_card(number):"], [31, "+", "    try:"], [32, "+", "        return hashlib.md5(number.encode()).hexdigest()"], [33, "+", "    except:"], [34, "+", "        pass"], [35, " ", ""], [36, " ", ""], [37, " ", "def total(items):"]], "findings": [{"line": 19, "sev": "critical", "title": "SQL built from string formatting", "rule": "SEC004", "agent": "security", "msg": "The query is assembled with string formatting or concatenation, which allows SQL injection.", "fix": "Use parameters: cursor.execute(\"SELECT * FROM users WHERE id = %s\", (user_id,))"}, {"line": 13, "sev": "critical", "title": "SQL built from string formatting", "rule": "SEC004", "agent": "security", "msg": "The SQL string is built by interpolating values, which allows SQL injection when it is executed.", "fix": "Keep placeholders in the SQL and pass values separately to execute()."}, {"line": 27, "sev": "high", "title": "Blocking sleep in async code", "rule": "PERF003", "agent": "performance", "msg": "time.sleep blocks the whole event loop, stalling every other request.", "fix": "Use `await asyncio.sleep(...)`."}, {"line": 26, "sev": "high", "title": "Blocking HTTP call in async code", "rule": "PERF004", "agent": "performance", "msg": "`requests` is synchronous and blocks the event loop inside an async function.", "fix": "Use an async client such as httpx.AsyncClient or aiohttp."}, {"line": 33, "sev": "high", "title": "Exception silently swallowed", "rule": "BUG002", "agent": "bugs", "msg": "The exception is caught and ignored, so failures will go unnoticed.", "fix": "Log the error or re-raise it; don't `pass`."}, {"line": 25, "sev": "high", "title": "Database query inside a loop (N+1)", "rule": "PERF001", "agent": "performance", "msg": "A query runs once per iteration; with N rows this makes N round trips to the database.", "fix": "Fetch everything in one query (e.g. `WHERE id IN (...)`, select_related / prefetch_related, or a JOIN)."}, {"line": 8, "sev": "high", "title": "Hard-coded credential", "rule": "SEC003", "agent": "security", "msg": "A password, token or API key appears to be assigned a literal value.", "fix": "Read the value from an environment variable or secrets manager instead."}, {"line": 17, "sev": "medium", "title": "Mutable default argument", "rule": "BUG004", "agent": "bugs", "msg": "Default values are created once, so this list/dict is shared between calls.", "fix": "Default to None and create the object inside: `items=None` then `items = items or []`."}, {"line": 32, "sev": "medium", "title": "Weak hash for sensitive data", "rule": "SEC009", "agent": "security", "msg": "MD5 and SHA-1 are broken for passwords, signatures and integrity checks.", "fix": "Use bcrypt/argon2 for passwords, or SHA-256+ (hashlib.sha256) for integrity."}, {"line": 17, "sev": "medium", "title": "New code without tests", "rule": "TEST001", "agent": "testing", "msg": "This PR adds 3 public function(s) (search_orders, sync_orders, hash_card) but no test file covers them.", "fix": "Add tests for `search_orders` covering the normal case, edge cases and errors."}], "counts": {"security": 5, "bug": 3, "performance": 4, "testing": 2}, "total": 14, "dropped": 3, "files": 2, "added": 41, "other": 4};
+  const code = document.getElementById("rp-code");
+  const pipe = document.getElementById("rp-pipe");
+  const runBtn = document.getElementById("rp-run");
+  const status = document.getElementById("rp-status");
+  const verdictEl = document.getElementById("rp-verdict");
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const node = n => pipe.querySelector(`[data-n="${n}"]`);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  const drawCode = () => {
+    code.innerHTML = D.lines.map(([n, k, t]) =>
+      `<div class="cl ${k === "+" ? "a" : k === "-" ? "d" : ""}" data-l="${k === "-" ? "" : n}"><span class="n">${n || ""}</span><span>${k === " " ? "" : k}</span><span>${esc(t)}</span></div>`).join("");
+  };
+  const reset = () => {
+    drawCode();
+    pipe.querySelectorAll(".node").forEach(el => { el.classList.remove("run", "done"); el.style.setProperty("--w", "0%"); if (el.dataset.n !== "parse") el.querySelector("b").textContent = "–"; });
+    verdictEl.classList.remove("show");
+    code.scrollTop = 0;
+  };
+  const progress = async (el, ms) => {
+    el.classList.add("run");
+    const t0 = performance.now();
+    while (performance.now() - t0 < ms) { el.style.setProperty("--w", Math.min(100, (performance.now() - t0) / ms * 100) + "%"); await sleep(40); }
+    el.style.setProperty("--w", "100%"); el.classList.remove("run"); el.classList.add("done");
+  };
+
+  let running = false;
+  const run = async () => {
+    if (running) return;
+    running = true; runBtn.disabled = true; reset();
+    status.textContent = `Parsing ${D.files} files, ${D.added} added lines…`;
+    await progress(node("parse"), 450);
+    status.textContent = "Agents reviewing in parallel…";
+    const labels = { security: "security", bug: "bugs", performance: "performance", testing: "testing" };
+    await Promise.all(Object.keys(labels).map((c, i) => progress(node(c), 900 + i * 260).then(() => { node(c).querySelector("b").textContent = D.counts[c]; })));
+    status.textContent = "Verifier grounding, de-duplicating and ranking…";
+    await progress(node("verify"), 500);
+    node("verify").querySelector("b").textContent = `${D.total} kept`;
+    const ordered = [...D.findings].sort((a, b) => a.line - b.line);
+    for (const f of ordered) {
+      const row = code.querySelector(`.cl[data-l="${f.line}"]`);
+      if (!row) continue;
+      row.classList.add("hit");
+      row.insertAdjacentHTML("afterend", `<div class="cm"><span class="sv sv-${f.sev}">${f.sev}</span><b>${esc(f.title)}</b><p>${esc(f.msg)}</p><small>${esc(f.rule)} · ${esc(f.agent)} agent</small></div>`);
+      code.scrollTop = Math.max(0, row.offsetTop - 60);
+      await sleep(360);
+    }
+    verdictEl.classList.add("show");
+    status.textContent = `${D.total} findings (${D.other} more in Receipt.tsx) · ${D.dropped} filtered by the verifier`;
+    runBtn.disabled = false; runBtn.textContent = "Replay"; running = false;
+  };
+  runBtn.addEventListener("click", run);
+  drawCode();
+  if ("IntersectionObserver" in window) {
+    const demoObs = new IntersectionObserver(es => { if (es[0].isIntersecting) { demoObs.disconnect(); setTimeout(run, 400); } }, { threshold: 0.45 });
+    demoObs.observe(document.querySelector(".fx-demo"));
+  }
+}
 
 /* ---------- page transitions ---------- */
 {

@@ -8,6 +8,7 @@ A single self-contained `index.html` (HTML, CSS and vanilla JavaScript, no build
 
 ## Projects featured
 
+- [ReviewPilot: multi-agent AI code review](https://github.com/kdurgareddy/reviewpilot) (flagship, with a live demo on the site)
 - [Autonomous MCP Agent Orchestration Engine](https://github.com/kdurgareddy/mcp-agent-orchestrator)
 - [Real-Time Computer Vision Inference Engine](https://github.com/kdurgareddy/realtime-cv-inference-engine)
 - [Inventory Tracking REST API](https://github.com/kdurgareddy/inventory-tracking-api)
